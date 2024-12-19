@@ -1,7 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
@@ -9,7 +7,6 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.MapStaticAssets();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -36,25 +33,12 @@ ProductSection[] productSections =
     new ProductSection(3, "Напитки", [products[5],]),
 ];
 
-app.MapGet("/product-sections", () => productSections)
+app.MapGet("/api/product-sections", () => productSections)
 .WithName("GetProductSections");
 
-app.MapGet("/products", () =>
-{
-    return products;
-})
+app.MapGet("/api/products", () => products)
 .WithName("GetProducts");
 
 app.MapFallbackToFile("/index.html");
 
 app.Run();
-
-internal record ProductSection(int SectionId,
-                               string Name,
-                               IList<Product> Products);
-internal record Product(int ProductId,
-                        int SectionId,
-                        string Name,
-                        string Ingridients,
-                        bool IsFixedPrice,
-                        decimal Price);
