@@ -1,9 +1,5 @@
 @CourseworkTerm5.Server_HostAddress = http://localhost:5105
 
-GET {{CourseworkTerm5.Server_HostAddress}}/api/products
-Accept: application/json
-###
-
-GET {{CourseworkTerm5.Server_HostAddress}}/api/product-sections
+GET {{CourseworkTerm5.Server_HostAddress}}/api/product-categories
 Accept: application/json
 ###
