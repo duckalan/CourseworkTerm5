@@ -3,3 +3,12 @@
 GET {{CourseworkTerm5.Server_HostAddress}}/api/product-categories
 Accept: application/json
 ###
+
+@productId = 1
+GET {{CourseworkTerm5.Server_HostAddress}}/api/pizzas/{{productId}}
+Accept: application/json
+###
+
+GET {{CourseworkTerm5.Server_HostAddress}}/api/toppings
+Accept: application/json
+###

@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\images\ingridients\**" />
+    <Content Remove="wwwroot\images\ingridients\**" />
+    <EmbeddedResource Remove="wwwroot\images\ingridients\**" />
+    <None Remove="wwwroot\images\ingridients\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>9.*-*</Version>
     </PackageReference>
@@ -32,7 +39,6 @@
 
   <ItemGroup>
     <Folder Include="Dtos\" />
-    <Folder Include="wwwroot\images\ingridients\" />
     <Folder Include="wwwroot\images\products\" />
   </ItemGroup>
 
