@@ -67,7 +67,8 @@ namespace CourseworkTerm5.Server
                         tv.WeightGram,
                         tv.PriceRub,
                     })
-                }).ToListAsync()
+                })
+                .ToListAsync()
             );
 
             return group;
