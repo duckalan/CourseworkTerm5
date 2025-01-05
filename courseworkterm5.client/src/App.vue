@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import { ref, onBeforeMount } from 'vue';
+import type { Ref } from 'vue';
+import { RouterView } from 'vue-router'
+import SiteHeader from '@/components/SiteHeader.vue'
+
 </script>
 
 <template>
-  Hello
-</template>
+  <SiteHeader />
 
-<style scoped lang="less">
-</style>
+  <RouterView />
+
+  <footer>
+
+  </footer>
+</template>

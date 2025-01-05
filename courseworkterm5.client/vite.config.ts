@@ -47,10 +47,14 @@ export default defineConfig({
     },
     server: {
         proxy: {
-            '^/weatherforecast': {
+            '^/api/*': {
                 target,
                 secure: false
-            }
+            },
+            '^/images/*': {
+                target,
+                secure: false
+            },
         },
         port: 52741,
         https: {
