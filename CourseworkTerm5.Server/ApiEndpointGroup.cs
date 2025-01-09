@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MimeKit;
 
 namespace CourseworkTerm5.Server
 {
@@ -71,7 +74,33 @@ namespace CourseworkTerm5.Server
                 .ToListAsync()
             );
 
+            group.MapPost("/sendemail", async
+                ([FromBody] Temporary t, IConfiguration config) =>
+            {
+                using var emailMessage = new MimeMessage();
+
+                emailMessage.From.Add(new MailboxAddress("ВкусноПицца", config["EmailSettings:auth:user"]));
+                emailMessage.To.Add(new MailboxAddress("", t.UserEmail));
+                emailMessage.Subject = "Ваш чек";
+                emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+                {
+                    Text = string.Join(", ", t.Products)
+                };
+
+                using (var client = new SmtpClient())
+                {
+                    await client.ConnectAsync(config["EmailSettings:host"], config.GetValue<int>("EmailSettings:port"), false);
+                    await client.AuthenticateAsync(config["EmailSettings:auth:user"], config["EmailSettings:auth:pass"]);
+                    await client.SendAsync(emailMessage);
+
+                    await client.DisconnectAsync(true);
+                }
+
+                Results.Ok(t.UserEmail);
+            });
+
             return group;
         }
     }
 }
+record Temporary(string UserEmail, string[] Products);

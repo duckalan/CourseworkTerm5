@@ -6,3 +6,7 @@
     margin: 0 auto;
     padding-inline: calc(8px + 1.5625vw);
 }
+
+.js-scroll-lock {
+    overflow: hidden;
+}

@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Ref } from 'vue';
 
 export interface Product {
   productId: number,
@@ -17,7 +16,7 @@ export interface ProductCategory {
 }
 
 export const useProductCategoriesStore = defineStore('productCategories', () => {
-  const productCategories: Ref<ProductCategory[]> = ref([]);
+  const productCategories = ref<ProductCategory[]>([]);
   const isLoading = ref(false);
   const isLoaded = ref(false);
 
@@ -32,5 +31,21 @@ export const useProductCategoriesStore = defineStore('productCategories', () => 
     isLoading.value = false;
   }
 
-  return {productCategories, isLoading, isLoaded, fetchProductCategories }
+  function findProductPriceById(productId: number, productCategoryId?: number): number | null {
+    if (productCategoryId) {
+      return productCategories.value
+        .find(pc => pc.productCategoryId === productCategoryId)
+        ?.products.find(p => p.productId === productId)
+        ?.basePriceRub
+        ?? null
+    }
+
+    return productCategories.value
+      .flatMap(pc => pc.products)
+      .find(p => p.productId === productId)
+      ?.basePriceRub
+      ?? null
+  }
+
+  return { productCategories, isLoading, isLoaded, fetchProductCategories, findProductPriceById }
 })

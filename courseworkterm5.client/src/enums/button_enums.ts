@@ -1,9 +1,9 @@
-export enum ButtonType {
+export const enum ButtonType {
     Primary = 'primary',
     Secondary = 'secondary',
 }
 
-export enum ButtonSize {
+export const enum ButtonSize {
     Small = 'small',
     Medium = 'medium',
     Large = 'large'

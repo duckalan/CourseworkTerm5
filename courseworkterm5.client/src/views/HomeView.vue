@@ -6,8 +6,7 @@ import { useProductCategoriesStore } from '@/stores/productCategoriesStore'
 const productCategoriesStore = useProductCategoriesStore();
 
 onBeforeMount(async () => {
-  if (!productCategoriesStore.isLoaded) {
-    console.log('fetching')
+  if (!productCategoriesStore.isLoaded && !productCategoriesStore.isLoading) {
     await productCategoriesStore.fetchProductCategories()
   }
 })
@@ -17,19 +16,18 @@ onBeforeMount(async () => {
   <main>
     <div class="container">
       <section v-for="productCategory of productCategoriesStore.productCategories"
-               class="product-section"
+               class="product-category"
                :key="productCategory.productCategoryId"
                :id="`${productCategory.name}`">
 
-        <h1 class="product-section__title">
+        <h1 class="product-category__title">
           {{ productCategory.name }}
         </h1>
 
-        <div class="product-section__cards">
+        <div class="product-category__cards">
           <ProductCard v-for="product of productCategory.products"
                        :product="product"
-                       :is-pizza="productCategory.name === 'Пиццы'"
-                       />
+                       :is-pizza="productCategory.name === 'Пиццы'" />
         </div>
 
       </section>
@@ -38,9 +36,10 @@ onBeforeMount(async () => {
 </template>
 
 <style lang="less" scoped>
-.product-section {
+.product-category {
   &__title {
-    font-size: var(--text-xxxl);
+    font-size: var(--text-xxl);
+    padding: 0.5rem;
     margin-bottom: 0.5rem;
   }
 

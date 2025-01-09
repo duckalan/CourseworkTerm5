@@ -2,12 +2,13 @@
 import { onBeforeMount, onMounted } from 'vue';
 import { useProductCategoriesStore } from '@/stores/productCategoriesStore';
 import NavLink from './NavLink.vue';
+import ShoppingCartButton from './ShoppingCartButton.vue';
 
-const productSectionsStore = useProductCategoriesStore();
+const productCategoriesStore = useProductCategoriesStore();
 
 onBeforeMount(async () => {
-    if (!productSectionsStore.isLoaded) {
-        await productSectionsStore.fetchProductCategories();
+    if (!productCategoriesStore.isLoaded && !productCategoriesStore.isLoading) {
+        await productCategoriesStore.fetchProductCategories()
     }
 });
 
@@ -28,7 +29,6 @@ onMounted(() => {
             mainNav?.classList.remove('js-sticky-top');
         }
     });
-
 })
 
 
@@ -64,7 +64,7 @@ onMounted(() => {
             <nav class="horizontal-nav main-nav__menu">
                 <ul class="horizontal-nav__list">
                     <li class="horizontal-nav__item"
-                        v-for="productCategory of productSectionsStore.productCategories"
+                        v-for="productCategory of productCategoriesStore.productCategories"
                         :key="productCategory.productCategoryId">
                         <NavLink :to="{
                             name: 'home',
@@ -76,7 +76,7 @@ onMounted(() => {
                 </ul>
             </nav>
             <div class="main-nav__shopping-cart">
-                Корзина
+                <ShoppingCartButton />
             </div>
         </div>
     </div>
@@ -85,8 +85,8 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .header {
-    background-color: #DBA87B;
-    z-index: 1;
+    background-color: var(--brand-tertiary);
+    z-index: 10;
 
     &__container {
         padding-block: 0.5rem;
@@ -104,7 +104,7 @@ onMounted(() => {
 .main-nav {
     background-color: var(--color-background);
     padding-block: 0.5rem;
-    z-index: 1;
+    z-index: 10;
 
     &__container {
         display: flex;
@@ -114,7 +114,7 @@ onMounted(() => {
         gap: 0.5rem;
     }
 
-    &__shopping-cart  {
+    &__shopping-cart {
         margin-left: auto;
     }
 }
