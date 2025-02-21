@@ -1,4 +1,4 @@
-import type { PizzaDiameterCm } from "@/enums/pizzaDiameter";
+import type { PizzaDiameterCm } from "@/types/PizzaDiameterCm";
 import { ref } from "vue";
 import { defineStore } from "pinia";
 

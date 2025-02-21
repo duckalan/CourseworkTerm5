@@ -74,17 +74,17 @@ namespace CourseworkTerm5.Server
                 .ToListAsync()
             );
 
-            group.MapPost("/sendemail", async
-                ([FromBody] Temporary t, IConfiguration config) =>
+            group.MapPost("/createorder", async
+                ([FromBody] OrderDto order, IConfiguration config) =>
             {
                 using var emailMessage = new MimeMessage();
 
                 emailMessage.From.Add(new MailboxAddress("ВкусноПицца", config["EmailSettings:auth:user"]));
-                emailMessage.To.Add(new MailboxAddress("", t.UserEmail));
+                emailMessage.To.Add(new MailboxAddress("", order.Customer.Email));
                 emailMessage.Subject = "Ваш чек";
                 emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
                 {
-                    Text = string.Join(", ", t.Products)
+                    Text = string.Join(", ", order.Products)
                 };
 
                 using (var client = new SmtpClient())
@@ -96,11 +96,10 @@ namespace CourseworkTerm5.Server
                     await client.DisconnectAsync(true);
                 }
 
-                Results.Ok(t.UserEmail);
+                Results.Ok();
             });
 
             return group;
         }
     }
 }
-record Temporary(string UserEmail, string[] Products);

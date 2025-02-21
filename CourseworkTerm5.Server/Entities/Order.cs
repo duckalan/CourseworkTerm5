@@ -4,6 +4,7 @@ public partial class Order
 {
     public int OrderId { get; set; }
 
+    // Must be in Customer entity --------------------
     public string CustomerName { get; set; } = null!;
 
     public string CustomerPhone { get; set; } = null!;
@@ -11,6 +12,7 @@ public partial class Order
     public string CustomerEmail { get; set; } = null!;
 
     public string? CustomerAddress { get; set; }
+    // -----------------------------------------------
 
     public DateTime CreatedAt { get; set; }
 

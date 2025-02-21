@@ -1,5 +1,5 @@
 import type { ToppingPreview } from '@/components/ToppingCardCheckbox.vue';
-import type { PizzaDiameterCm } from '@/enums/pizzaDiameter';
+import type PizzaDiameterCm from '@/types/PizzaDiameterCm';
 import { defineStore } from 'pinia'
 import { computed, ref, onMounted } from 'vue';
 

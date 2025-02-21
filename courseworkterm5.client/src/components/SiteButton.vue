@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ButtonType, ButtonSize } from '@/enums/button_enums'
+import { ButtonType, ButtonSize } from '@/enums/ButtonEnums'
 import { computed } from 'vue';
 
 const props = defineProps<{

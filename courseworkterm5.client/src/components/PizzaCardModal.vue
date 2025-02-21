@@ -3,7 +3,7 @@ import { computed, onMounted, ref, watch } from 'vue';
 import type { Product } from '@/stores/productCategoriesStore';
 import { useToppingStore } from '@/stores/toppingStore';
 import SiteButton from './SiteButton.vue';
-import { ButtonSize, ButtonType } from '@/enums/button_enums';
+import { ButtonSize, ButtonType } from '@/enums/ButtonEnums';
 import PizzaVariantRadio from './PizzaVariantRadio.vue';
 import type { PizzaVariant } from './PizzaVariantRadio.vue';
 import ToppingCardCheckbox, { type ToppingPreview } from './ToppingCardCheckbox.vue';

@@ -3,7 +3,7 @@ import { onMounted } from 'vue';
 import { useShoppingCartStore } from '@/stores/shoppingCartStore';
 import DrawerCartItem from './DrawerCartItem.vue';
 import SiteButton from './SiteButton.vue';
-import { ButtonSize, ButtonType } from '@/enums/button_enums';
+import { ButtonSize, ButtonType } from '@/enums/ButtonEnums';
 
 const shoppingCartStore = useShoppingCartStore();
 const emit = defineEmits(['close']);

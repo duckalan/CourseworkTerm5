@@ -6,5 +6,5 @@ export const enum ButtonType {
 export const enum ButtonSize {
     Small = 'small',
     Medium = 'medium',
-    Large = 'large'
+    Large = 'large',
 }

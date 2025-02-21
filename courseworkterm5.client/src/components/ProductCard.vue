@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onUnmounted, ref, watch } from 'vue';
-import { ButtonType, ButtonSize } from '@/enums/button_enums'
+import { ButtonType, ButtonSize } from '@/enums/ButtonEnums'
 import SiteButton from '@/components/SiteButton.vue';
 import type { Product } from '@/stores/productCategoriesStore';
 import { useShoppingCartStore } from '@/stores/shoppingCartStore';
@@ -78,6 +78,20 @@ function removeOneProductUnitFromCart() {
 const isIncrementDisabled = computed(() => {
     return shoppingCartStore.getItemQuantity(props.product.productId) === 9;
 })
+
+/*
+card
+    card__header
+        card__image
+
+    card__main
+        card__name
+        card__description
+
+    card__footer
+        card__base-price
+            card__price
+*/
 </script>
 
 <template>
@@ -91,7 +105,7 @@ const isIncrementDisabled = computed(() => {
 
         <main class="card__main">
             <h2 class="card__name">{{ product.name }}</h2>
-            <p class="card__ingridients">{{ product.description }}</p>
+            <p class="card__description">{{ product.description }}</p>
         </main>
 
         <footer class="card__footer">
@@ -141,7 +155,7 @@ const isIncrementDisabled = computed(() => {
 
                 <template v-else>
                     <div class="quantity-selector">
-                        <button class="button button_type_decrement"
+                        <button class="button-temp button-temp_type_decrement"
                                 @click="removeOneProductUnitFromCart()"
                                 @click.native.prevent>
                             −
@@ -152,7 +166,7 @@ const isIncrementDisabled = computed(() => {
                                :value="shoppingCartStore.getItemQuantity(product.productId)"
 
                                readonly>
-                        <button class="button button_type_increment"
+                        <button class="button-temp button-temp_type_increment"
                                 @click="addOneProductUnitToCart()"
                                 @click.native.prevent
                                 :disabled="isIncrementDisabled">
@@ -169,6 +183,17 @@ const isIncrementDisabled = computed(() => {
 </template>
 
 <style scoped lang="less">
+
+/*
+.card {
+    &__image { ... }
+    &__main { ... }
+    &__name { ... }
+    &__description { ... }
+    &__footer { ... }
+    &__price { ... }
+}
+*/
 .card {
     color: var(--color-text);
     background: var(--color-background);
@@ -192,7 +217,7 @@ const isIncrementDisabled = computed(() => {
         font-size: var(--text-lg);
     }
 
-    &__ingridients {
+    &__description {
         font-size: var(--text-sm);
         color: var(--color-text-muted);
         line-height: 1.3;
@@ -245,7 +270,7 @@ input[type="number"] {
     }
 }
 
-.button {
+.button-temp {
     font-size: inherit;
     padding: 0.5rem;
     transition: background-color 200ms ease-out;
