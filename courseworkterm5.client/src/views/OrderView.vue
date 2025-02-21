@@ -16,6 +16,10 @@ const order = ref<OrderModel>({
     paymentType: PaymentType.Online,
     totalPriceRub: shoppingCartStore.totalPriceRub,
     useShipping: true,
+    products: shoppingCartStore.items.map(item => ({
+        productName: item.cartItem.name,
+        quantity: item.quantity
+    }))
 });
 
 function sendOrder() {
@@ -24,7 +28,7 @@ function sendOrder() {
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify(order)
+        body: JSON.stringify(order.value)
     }).then(response => console.log(response));
 
     resetShoppingCartState();

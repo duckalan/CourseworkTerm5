@@ -1,6 +1,5 @@
-﻿using CourseworkTerm5.Server.Entities;
+﻿using CourseworkTerm5.Server.Dtos;
 
 record OrderDto(CustomerDto Customer,
-                PaymentType PaymentType,
                 decimal TotalPriceRub,
-                bool UseShipping);
+                IEnumerable<PurchaseDto> Products);

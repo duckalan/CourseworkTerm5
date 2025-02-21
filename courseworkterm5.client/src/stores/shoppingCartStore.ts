@@ -44,6 +44,11 @@ export interface CartItemPizza {
     toppings?: ToppingPreview[]
 }
 
+export interface SimplePurchase {
+    productName: string,
+    quantity: number,
+}
+
 export interface Purchase {
     cartItem: CartItem,
     quantity: number

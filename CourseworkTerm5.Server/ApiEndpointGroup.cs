@@ -81,7 +81,7 @@ namespace CourseworkTerm5.Server
 
                 emailMessage.From.Add(new MailboxAddress("ВкусноПицца", config["EmailSettings:auth:user"]));
                 emailMessage.To.Add(new MailboxAddress("", order.Customer.Email));
-                emailMessage.Subject = "Ваш чек";
+                emailMessage.Subject = $"Привет, {order.Customer.FullName}. Твой чек";
                 emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
                 {
                     Text = string.Join(", ", order.Products)

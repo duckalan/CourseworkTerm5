@@ -1,6 +1,12 @@
 ﻿namespace CourseworkTerm5.Server.Dtos
 {
-    internal class CartItemDto
-    {
-    }
+    public record CartItemDto(
+        int ProductId,
+        string Name,
+        string? Description,
+        Uri ImageUrl,
+        decimal PriceRub);
+
+    // !!!!!!!
+    public record PurchaseDto(string ProductName, int Quantity);
 }
